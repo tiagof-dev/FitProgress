@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda Fitness</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="dark-theme">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <h1>💪 Agenda Fitness</h1>
+
+        <p>
+            Organize seus treinos e acompanhe sua evolução
+        </p>
+
+        <button id="menuBtn">
+
+        ☰
+
+        </button>
+
+    </header>    
+
+<aside id="sidebar">
+
+    <button id="goHome">
+
+        🏠 Home
+
+    </button>
+
+    <button id="goHistory">
+
+        📚 Histórico
+
+    </button>
+
+    <hr>
+
+    <button id="lightTheme">
+
+        ☀️ Tema Claro
+
+    </button>
+
+    <button id="darkTheme">
+
+        🌙 Tema Escuro
+
+    </button>
+
+</aside>
+
+    <!-- DASHBOARD -->
+
+    <section id="homePage" class="page active">
+
+            <section class="dashboard">
+
+                <div class="dashboard-top">
+
+                    <div class="progress-card">
+
+                        <div class="circle-container">
+
+                            <svg
+                                class="progress-svg"
+                                width="180"
+                                height="180">
+
+                                <circle
+                                    class="circle-bg"
+                                    cx="90"
+                                    cy="90"
+                                    r="80">
+                                </circle>
+
+                                <circle
+                                    class="circle-progress"
+                                    cx="90"
+                                    cy="90"
+                                    r="80">
+                                </circle>
+
+                            </svg>
+
+                            <div id="progressPercent">
+
+                                0%
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="motivationalMessage"
+                            class="motivational-message">
+
+                            🚀 Vamos começar!
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            🏆
+                        </span>
+
+                        <h3>Total Treinos</h3>
+
+                        <p id="totalTreinos">
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            🔥
+                        </span>
+
+                        <h3>Sequência</h3>
+
+                        <p id="sequenciaAtual">
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            📅
+                        </span>
+
+                        <h3>Este Mês</h3>
+
+                        <p id="treinosMes">
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span class="stat-icon">
+                            🎯
+                        </span>
+
+                        <h3>Meta</h3>
+
+                        <p id="metaAtual">
+                            20
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- META -->
+
+                <div class="meta-card">
+
+                    <label for="metaMensal">
+
+                        Meta mensal de treinos
+
+                    </label>
+
+                    <select id="metaMensal">
+
+                        <option value="10">10</option>
+
+                        <option value="15">15</option>
+
+                        <option
+                            value="20"
+                            selected>
+
+                            20
+
+                        </option>
+
+                        <option value="25">25</option>
+
+                        <option value="30">30</option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+            <!-- CALENDÁRIO -->
+
+            <section class="calendar-section">
+
+                <div class="calendar-header">
+
+                    <button
+                        id="prevMonth"
+                        class="month-btn">
+
+                        ◀
+
+                    </button>
+
+                    <h2 id="monthYear">
+
+                        Junho 2026
+
+                    </h2>
+
+                    <button
+                        id="nextMonth"
+                        class="month-btn">
+
+                        ▶
+
+                    </button>
+
+                </div>
+
+                <div class="weekdays">
+
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+
+                </div>
+
+                <div id="calendar">
+
+                </div>
+
+            </section>
+
+            <!-- DIA SELECIONADO -->
+
+            <section class="selected-day-card">
+
+                <h2 id="selectedDate">
+
+                    Selecione uma data
+
+                </h2>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Tipo de treino
+
+                    </label>
+
+                    <div class="treinos-grid">
+
+            <label class="chip">
+                <input type="checkbox" value="Peito">
+                <span>Peito</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Costas">
+                <span>Costas</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Pernas">
+                <span>Pernas</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Ombro">
+                <span>Ombro</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Braços">
+                <span>Braços</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Cardio">
+                <span>Cardio</span>
+            </label>
+
+            <label class="chip">
+                <input type="checkbox" value="Abdômen">
+                <span>Abdômen</span>
+            </label>
+
+        </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Descrição do treino
+
+                    </label>
+
+                    <textarea
+                        id="descricaoTreino"
+                        placeholder="Descreva seu treino..."></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Observações
+
+                    </label>
+
+                    <textarea
+                        id="observacoes"
+                        placeholder="Anotações, evolução, carga utilizada..."></textarea>
+
+                </div>
+
+                <div class="action-buttons">
+
+                    <button
+                        id="btnSalvar"
+                        class="btn btn-save">
+                        💾 Salvar
+                    </button>
+
+                    <button
+                        id="btnConcluir"
+                        class="btn btn-complete">
+                        ✔ Concluir
+                    </button>
+
+                    <button
+                        id="btnLimpar"
+                        class="btn btn-delete">
+                        🗑 Limpar Dia
+                    </button>
+
+                </div>
+
+            </section>
+
+    </section>
+
+    <section id="historyPage" class="page hidden">
+
+        <div class="history-page-header">
+
+            <h2>
+                📚 Histórico de Treinos
+            </h2>
+
+            <input
+                type="text"
+                id="searchHistory"
+                placeholder="🔍 Buscar treino..."
+            >
+
+        </div>
+
+        <div
+            id="historyGrid"
+            class="history-grid"
+        >
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            ©
+            <span id="anoAtual"></span>
+
+            Agenda Fitness
+
+        </p>
+
+        <p>
+
+            Desenvolvido por Tiagof-dev
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
