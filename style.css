@@ -781,3 +781,69 @@ footer p{
     cursor:pointer;
 
 }
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.5);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal.hidden{
+
+    display:none;
+
+}
+
+.modal-content{
+
+    background:#222;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+.modal-content p {
+    padding: 5px;
+}
+.modal-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    margin-top:15px;
+
+}
+
+#btnCancelarModal {
+    background: #ff0000;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#btnConfirmarModal {
+    background: #16a34a;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}

@@ -1,4 +1,4 @@
- const calendar = document.getElementById("calendar");
+const calendar = document.getElementById("calendar");
 const monthYear = document.getElementById("monthYear");
 
 const selectedDateElement =
@@ -42,6 +42,11 @@ document.getElementById("goHome");
 const goHistory =
 document.getElementById("goHistory");
 
+const searchHistory =
+document.getElementById(
+    "searchHistory"
+);
+
 const homePage =
 document.getElementById(
     "homePage"
@@ -65,6 +70,21 @@ document.getElementById(
 const darkTheme =
 document.getElementById(
     "darkTheme"
+);
+
+const modalConfirmar =
+document.getElementById(
+    "modalConfirmar"
+);
+
+const btnCancelarModal =
+document.getElementById(
+    "btnCancelarModal"
+);
+
+const btnConfirmarModal =
+document.getElementById(
+    "btnConfirmarModal"
 );
 
 let currentDate = new Date();
@@ -511,24 +531,17 @@ btnLimpar.addEventListener(
 
         if(!selectedDate){
 
-            alert(
+           /* alert(
                 "Selecione uma data."
+            );*/
+
+            return;
+
+        }
+
+        modalConfirmar.classList.remove(
+                 "hidden"
             );
-
-            return;
-
-        }
-
-        const confirmar =
-        confirm(
-            "Deseja apagar este treino?"
-        );
-
-        if(!confirmar){
-
-            return;
-
-        }
 
         const dados =
         obterDados();
@@ -543,9 +556,9 @@ btnLimpar.addEventListener(
 
         atualizarDashboard();
 
-        alert(
+        /*alert(
             "Treino removido."
-        );
+        );*/
 
     }
 );
@@ -819,6 +832,70 @@ function atualizarHistorico(
 
 }
 
+function buscarHistorico(){
+
+    const termo =
+    searchHistory.value
+    .toLowerCase();
+
+    const dados =
+    obterDados();
+
+    const registros =
+    Object.entries(dados);
+
+    const concluidos =
+    registros.filter(
+        ([_, treino]) =>
+        treino.concluido
+    );
+
+    const filtrados =
+    concluidos.filter(
+        ([data, treino]) => {
+
+            const tipo =
+            Array.isArray(
+                treino.tipo
+            )
+            ? treino.tipo.join(" ")
+            : treino.tipo || "";
+
+            return (
+                data.toLowerCase()
+                .includes(termo)
+
+                ||
+
+                tipo.toLowerCase()
+                .includes(termo)
+
+                ||
+
+                (
+                    treino.descricao || ""
+                )
+                .toLowerCase()
+                .includes(termo)
+
+                ||
+
+                (
+                    treino.observacoes || ""
+                )
+                .toLowerCase()
+                .includes(termo)
+            );
+
+        }
+    );
+
+    atualizarHistorico(
+        filtrados
+    );
+
+}
+
 function atualizarSequencia(
     concluidos
 ){
@@ -961,6 +1038,40 @@ menuBtn.addEventListener(
         sidebar.classList.toggle(
             "open"
         );
+
+    }
+);
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const menuAberto =
+            sidebar.classList.contains(
+                "open"
+            );
+
+        const clicouNoMenu =
+            sidebar.contains(
+                event.target
+            );
+
+        const clicouNoBotao =
+            menuBtn.contains(
+                event.target
+            );
+
+        if (
+            menuAberto &&
+            !clicouNoMenu &&
+            !clicouNoBotao
+        ) {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+        }
 
     }
 );
@@ -1114,3 +1225,52 @@ if ("serviceWorker" in navigator) {
   });
 
 }
+
+searchHistory
+.addEventListener(
+    "input",
+    buscarHistorico
+);
+
+btnCancelarModal
+.addEventListener(
+    "click",
+    () => {
+
+        modalConfirmar
+        .classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+btnConfirmarModal
+.addEventListener(
+    "click",
+    () => {
+
+        const dados =
+        obterDados();
+
+        delete dados[
+            selectedDate
+        ];
+
+        salvarBanco(
+            dados
+        );
+
+        carregarTreinoDia();
+
+        renderizarCalendario();
+
+        atualizarDashboard();
+
+        modalConfirmar
+        .classList.add(
+            "hidden"
+        );
+
+    }
+);
