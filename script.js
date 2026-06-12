@@ -529,11 +529,9 @@ btnLimpar.addEventListener(
     "click",
     () => {
 
+
         if(!selectedDate){
 
-           /* alert(
-                "Selecione uma data."
-            );*/
 
             return;
 
@@ -541,24 +539,7 @@ btnLimpar.addEventListener(
 
         modalConfirmar.classList.remove(
                  "hidden"
-            );
-
-        const dados =
-        obterDados();
-
-        delete dados[selectedDate];
-
-        salvarBanco(dados);
-
-        carregarTreinoDia();
-
-        renderizarCalendario();
-
-        atualizarDashboard();
-
-        /*alert(
-            "Treino removido."
-        );*/
+        );
 
     }
 );
