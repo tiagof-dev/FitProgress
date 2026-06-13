@@ -3,6 +3,7 @@ const CACHE_NAME = "agenda-fitness-v2";
 const urlsToCache = [
   "./",
   "./index.html",
+  "./historico.html",
   "./style.css",
   "./script.js"
 ];

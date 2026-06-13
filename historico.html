@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda Fitness - Histórico</title>
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="theme-color" content="#4CAF50">
+
+    <link rel="manifest" href="manifest.json">
+
+</head>
+
+<body class="dark-theme">
+
+    <header class="header">
+
+        <h1>💪 Agenda Fitness</h1>
+
+        <p>
+            Organize seus treinos e acompanhe sua evolução
+        </p>
+
+        <button id="menuBtn" aria-label="Abrir menu">
+            ☰
+        </button>
+
+    </header>
+
+    <aside id="sidebar">
+
+        <nav class="sidebar-nav" aria-label="Navegação principal">
+
+            <a
+                class="sidebar-link"
+                href="index.html">
+
+                🏠 Início
+
+            </a>
+
+            <a
+                class="sidebar-link active"
+                href="historico.html"
+                aria-current="page">
+
+                📚 Histórico
+
+            </a>
+
+        </nav>
+
+        <hr>
+
+        <button id="lightTheme">
+            ☀️ Tema Claro
+        </button>
+
+        <button id="darkTheme">
+            🌙 Tema Escuro
+        </button>
+
+    </aside>
+
+    <main>
+
+        <section id="historyPage" class="page active">
+
+            <div class="history-page-header">
+
+                <h2>
+                    📚 Histórico de Treinos
+                </h2>
+
+                <input
+                    type="text"
+                    id="searchHistory"
+                    placeholder="🔍 Buscar treino..."
+                >
+
+            </div>
+
+            <div
+                id="historyGrid"
+                class="history-grid">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+
+            ©
+            <span id="anoAtual"></span>
+
+            Agenda Fitness
+
+        </p>
+
+        <p>
+
+            Desenvolvido por Tiagof-dev
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

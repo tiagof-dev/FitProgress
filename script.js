@@ -87,6 +87,11 @@ document.getElementById(
     "btnConfirmarModal"
 );
 
+const anoAtualElement =
+document.getElementById(
+    "anoAtual"
+);
+
 let currentDate = new Date();
 
 let selectedDate = null;
@@ -153,6 +158,12 @@ function parseDateFromKey(key) {
 }
 
 function renderizarCalendario() {
+
+    if(!calendar || !monthYear){
+
+        return;
+
+    }
 
     calendar.innerHTML = "";
 
@@ -241,6 +252,12 @@ function renderizarCalendario() {
 
 function selecionarDia(data){
 
+    if(!selectedDateElement){
+
+        return;
+
+    }
+
     document
     .querySelectorAll(".day")
     .forEach(dia => {
@@ -289,6 +306,8 @@ function selecionarDia(data){
 
 }
 
+if(prevMonth){
+
 prevMonth.addEventListener(
     "click",
     () => {
@@ -301,6 +320,10 @@ prevMonth.addEventListener(
 
     }
 );
+
+}
+
+if(nextMonth){
 
 nextMonth.addEventListener(
     "click",
@@ -315,14 +338,28 @@ nextMonth.addEventListener(
     }
 );
 
-document
-.getElementById("anoAtual")
-.textContent =
+}
+
+if(anoAtualElement){
+
+anoAtualElement.textContent =
 new Date().getFullYear();
+
+}
+
+if(calendar && monthYear){
 
 renderizarCalendario();
 
+}
+
 function autoResize(textarea){
+
+    if(!textarea){
+
+        return;
+
+    }
 
     textarea.style.height = "auto";
 
@@ -330,6 +367,8 @@ function autoResize(textarea){
     textarea.scrollHeight + "px";
 
 }
+
+if(descricaoTreino && observacoes){
 
 [descricaoTreino, observacoes]
 .forEach(textarea => {
@@ -341,9 +380,21 @@ function autoResize(textarea){
 
 });
 
+}
+
 function carregarTreinoDia(){
 
-    if(!selectedDate) return;
+    if(
+        !selectedDate ||
+        !selectedDateElement ||
+        !descricaoTreino ||
+        !observacoes ||
+        !btnConcluir
+    ){
+
+        return;
+
+    }
 
     const dados = obterDados();
 
@@ -422,6 +473,8 @@ if(Array.isArray(treino.tipo)){
 
 }
 
+if(btnSalvar){
+
 btnSalvar.addEventListener(
     "click",
     () => {
@@ -474,6 +527,10 @@ btnSalvar.addEventListener(
     }
 );
 
+}
+
+if(btnConcluir){
+
 btnConcluir.addEventListener(
     "click",
     () => {
@@ -525,6 +582,10 @@ btnConcluir.addEventListener(
     }
 );
 
+}
+
+if(btnLimpar){
+
 btnLimpar.addEventListener(
     "click",
     () => {
@@ -544,9 +605,17 @@ btnLimpar.addEventListener(
     }
 );
 
+}
+
 window.addEventListener(
     "load",
     () => {
+
+        if(!descricaoTreino || !observacoes){
+
+            return;
+
+        }
 
         autoResize(
             descricaoTreino
@@ -587,6 +656,21 @@ document.getElementById("metaMensal");
 
 function atualizarDashboard(){
 
+    if(
+        !progressCircle ||
+        !progressPercent ||
+        !motivationalMessage ||
+        !totalTreinosElement ||
+        !sequenciaAtualElement ||
+        !treinosMesElement ||
+        !metaAtualElement ||
+        !metaMensal
+    ){
+
+        return;
+
+    }
+
     const dados = obterDados();
 
     const registros =
@@ -621,10 +705,8 @@ function atualizarDashboard(){
             parseDateFromKey(data);
 
             return (
-                d.getMonth()
-                === mesAtual &&
-                d.getFullYear()
-                === anoAtual
+                d.getMonth() === mesAtual &&
+                d.getFullYear() === anoAtual
             );
 
         }
@@ -682,45 +764,45 @@ function atualizarMensagem(
     percentual
 ){
 
+    if(!motivationalMessage){
+
+        return;
+
+    }
+
     if(percentual === 0){
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "🚀 Vamos começar!";
 
     }
     else if(percentual < 25){
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "💪 Bom começo!";
 
     }
     else if(percentual < 50){
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "🔥 Você está evoluindo!";
 
     }
     else if(percentual < 75){
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "⚡ Excelente ritmo!";
 
     }
     else if(percentual < 100){
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "🏆 Falta pouco!";
 
     }
     else{
 
-        motivationalMessage
-        .textContent =
+        motivationalMessage.textContent =
         "🎉 Meta atingida!";
 
     }
@@ -731,13 +813,18 @@ function atualizarHistorico(
     concluidos
 ){
 
+    if(!historyGrid){
+
+        return;
+
+    }
+
     historyGrid.innerHTML = "";
 
     const ultimos =
     [...concluidos]
     .sort((a,b)=>
-        parseDateFromKey(b[0])
-        - parseDateFromKey(a[0])
+        parseDateFromKey(b[0]) - parseDateFromKey(a[0])
     )
     .slice(0,10);
 
@@ -758,13 +845,9 @@ function atualizarHistorico(
         ([data, treino]) => {
 
             const item =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
-            item.classList.add(
-                "history-item"
-            );
+            item.classList.add("history-item");
 
             item.innerHTML = `
                 <strong>
@@ -804,9 +887,7 @@ function atualizarHistorico(
                 }
            `;
 
-            historyGrid.appendChild(
-                item
-            );
+            historyGrid.appendChild(item);
 
         }
     );
@@ -814,6 +895,12 @@ function atualizarHistorico(
 }
 
 function buscarHistorico(){
+
+    if(!searchHistory || !historyGrid){
+
+        return;
+
+    }
 
     const termo =
     searchHistory.value
@@ -836,36 +923,15 @@ function buscarHistorico(){
         ([data, treino]) => {
 
             const tipo =
-            Array.isArray(
-                treino.tipo
-            )
+            Array.isArray(treino.tipo)
             ? treino.tipo.join(" ")
             : treino.tipo || "";
 
             return (
-                data.toLowerCase()
-                .includes(termo)
-
-                ||
-
-                tipo.toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (
-                    treino.descricao || ""
-                )
-                .toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (
-                    treino.observacoes || ""
-                )
-                .toLowerCase()
-                .includes(termo)
+                data.toLowerCase().includes(termo) ||
+                tipo.toLowerCase().includes(termo) ||
+                (treino.descricao || "").toLowerCase().includes(termo) ||
+                (treino.observacoes || "").toLowerCase().includes(termo)
             );
 
         }
@@ -881,12 +947,15 @@ function atualizarSequencia(
     concluidos
 ){
 
-    if(
-        concluidos.length === 0
-    ){
+    if(!sequenciaAtualElement){
 
-        sequenciaAtualElement
-        .textContent = 0;
+        return;
+
+    }
+
+    if(concluidos.length === 0){
+
+        sequenciaAtualElement.textContent = 0;
 
         return;
 
@@ -898,9 +967,7 @@ function atualizarSequencia(
         ([data]) =>
         parseDateFromKey(data)
     )
-    .sort(
-        (a,b) => b-a
-    );
+    .sort((a,b) => b-a);
 
     let sequencia = 1;
 
@@ -910,18 +977,12 @@ function atualizarSequencia(
         i++
     ){
 
-        const atual =
-        datas[i];
-
-        const proxima =
-        datas[i + 1];
+        const atual = datas[i];
+        const proxima = datas[i + 1];
 
         const diferenca =
         Math.floor(
-            (
-                atual -
-                proxima
-            ) /
+            (atual - proxima) /
             (1000 * 60 * 60 * 24)
         );
 
@@ -937,11 +998,11 @@ function atualizarSequencia(
 
     }
 
-    sequenciaAtualElement
-    .textContent =
-    sequencia;
+    sequenciaAtualElement.textContent = sequencia;
 
 }
+
+if(metaMensal){
 
 metaMensal.addEventListener(
     "change",
@@ -957,23 +1018,28 @@ metaMensal.addEventListener(
     }
 );
 
+}
+
 function carregarMeta(){
 
+    if(!metaMensal){
+
+        return;
+
+    }
+
     const metaSalva =
-    localStorage.getItem(
-        "metaMensal"
-    );
+    localStorage.getItem("metaMensal");
 
     if(metaSalva){
 
-        metaMensal.value =
-        metaSalva;
+        metaMensal.value = metaSalva;
 
     }
 
 }
 
-// removed unused originals for onclick handlers
+if(btnSalvar){
 
 btnSalvar.addEventListener(
     "click",
@@ -987,6 +1053,10 @@ btnSalvar.addEventListener(
     }
 );
 
+}
+
+if(btnConcluir){
+
 btnConcluir.addEventListener(
     "click",
     () => {
@@ -999,18 +1069,9 @@ btnConcluir.addEventListener(
     }
 );
 
-window.addEventListener(
-    "load",
-    () => {
+}
 
-        carregarMeta();
-
-        carregarTema();
-
-        atualizarDashboard();
-
-    }
-);
+if(menuBtn && sidebar){
 
 menuBtn.addEventListener(
     "click",
@@ -1042,11 +1103,11 @@ document.addEventListener(
                 event.target
             );
 
-        if (
+        if(
             menuAberto &&
             !clicouNoMenu &&
             !clicouNoBotao
-        ) {
+        ){
 
             sidebar.classList.remove(
                 "open"
@@ -1057,71 +1118,26 @@ document.addEventListener(
     }
 );
 
-function mostrarHome(){
-
-    historyPage.classList.remove(
-        "active"
-    );
-
-    historyPage.classList.add(
-        "hidden"
-    );
-
-    homePage.classList.remove(
-        "hidden"
-    );
-
-    homePage.classList.add(
-        "active"
-    );
-
 }
 
-function mostrarHistorico(){
+document
+.querySelectorAll(".sidebar-link")
+.forEach(link => {
 
-    homePage.classList.remove(
-        "active"
+    link.addEventListener(
+        "click",
+        () => {
+
+            if(sidebar){
+
+                sidebar.classList.remove("open");
+
+            }
+
+        }
     );
 
-    homePage.classList.add(
-        "hidden"
-    );
-
-    historyPage.classList.remove(
-        "hidden"
-    );
-
-    historyPage.classList.add(
-        "active"
-    );
-
-}
-
-goHome.addEventListener(
-    "click",
-    () => {
-
-        mostrarHome();
-
-        sidebar.classList.remove(
-            "open"
-        );
-
-    }
-);
-
-goHistory.addEventListener(
-    "click",
-    () => {
-
-        mostrarHistorico();
-
-        sidebar.classList.remove(
-            "open"
-        );
-
-    }
-);
+});
 
 function aplicarTema(
     tema
@@ -1138,6 +1154,8 @@ function aplicarTema(
 
 }
 
+if(lightTheme){
+
 lightTheme.addEventListener(
     "click",
     () => {
@@ -1151,6 +1169,10 @@ lightTheme.addEventListener(
 
     }
 );
+
+}
+
+if(darkTheme){
 
 darkTheme.addEventListener(
     "click",
@@ -1166,12 +1188,12 @@ darkTheme.addEventListener(
     }
 );
 
+}
+
 function carregarTema(){
 
     const temaSalvo =
-    localStorage.getItem(
-        "theme"
-    );
+    localStorage.getItem("theme");
 
     if(temaSalvo){
 
@@ -1183,51 +1205,61 @@ function carregarTema(){
 
 }
 
-if ("serviceWorker" in navigator) {
+if("serviceWorker" in navigator){
 
-  window.addEventListener("load", () => {
+    window.addEventListener("load", () => {
 
-    navigator.serviceWorker
-      .register("./sw.js")
-      .then(() => {
+        navigator.serviceWorker
+        .register("./sw.js")
+        .then(() => {
 
-        console.log("PWA ativo");
+            console.log("PWA ativo");
 
-      })
-      .catch(error => {
+        })
+        .catch(error => {
 
-        console.log(
-          "Erro ao registrar PWA:",
-          error
-        );
+            console.log(
+                "Erro ao registrar PWA:",
+                error
+            );
 
-      });
+        });
 
-  });
+    });
 
 }
 
-searchHistory
-.addEventListener(
+if(searchHistory){
+
+searchHistory.addEventListener(
     "input",
     buscarHistorico
 );
 
-btnCancelarModal
-.addEventListener(
+}
+
+if(btnCancelarModal){
+
+btnCancelarModal.addEventListener(
     "click",
     () => {
 
-        modalConfirmar
-        .classList.add(
-            "hidden"
-        );
+        if(modalConfirmar){
+
+            modalConfirmar.classList.add(
+                "hidden"
+            );
+
+        }
 
     }
 );
 
-btnConfirmarModal
-.addEventListener(
+}
+
+if(btnConfirmarModal){
+
+btnConfirmarModal.addEventListener(
     "click",
     () => {
 
@@ -1248,10 +1280,28 @@ btnConfirmarModal
 
         atualizarDashboard();
 
-        modalConfirmar
-        .classList.add(
-            "hidden"
-        );
+        if(modalConfirmar){
+
+            modalConfirmar.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+);
+
+}
+
+window.addEventListener(
+    "load",
+    () => {
+
+        carregarMeta();
+
+        carregarTema();
+
+        atualizarDashboard();
 
     }
 );

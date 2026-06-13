@@ -20,8 +20,6 @@
 
 <body class="dark-theme">
 
-    <!-- HEADER -->
-
     <header class="header">
 
         <h1>💪 Agenda Fitness</h1>
@@ -30,43 +28,48 @@
             Organize seus treinos e acompanhe sua evolução
         </p>
 
-        <button id="menuBtn">
-
-        ☰
-
+        <button id="menuBtn" aria-label="Abrir menu">
+            ☰
         </button>
 
-    </header>    
+    </header>
 
-<aside id="sidebar">
+    <aside id="sidebar">
 
-    <button id="goHome">
+        <nav class="sidebar-nav" aria-label="Navegação principal">
 
-        🏠 Home
+            <a
+                class="sidebar-link active"
+                href="index.html"
+                aria-current="page">
 
-    </button>
+                🏠 Início
 
-    <button id="goHistory">
+            </a>
 
-        📚 Histórico
+            <a
+                class="sidebar-link"
+                href="historico.html">
 
-    </button>
+                📚 Histórico
 
-    <hr>
+            </a>
 
-    <button id="lightTheme">
+        </nav>
 
-        ☀️ Tema Claro
+        <hr>
 
-    </button>
+        <button id="lightTheme">
+            ☀️ Tema Claro
+        </button>
 
-    <button id="darkTheme">
+        <button id="darkTheme">
+            🌙 Tema Escuro
+        </button>
 
-        🌙 Tema Escuro
+    </aside>
 
-    </button>
-
-</aside>
+    <main>
 
     <!-- DASHBOARD -->
 
@@ -377,33 +380,6 @@
 
             </section>
 
-    </section>
-
-    <section id="historyPage" class="page hidden">
-
-        <div class="history-page-header">
-
-            <h2>
-                📚 Histórico de Treinos
-            </h2>
-
-            <input
-                type="text"
-                id="searchHistory"
-                placeholder="🔍 Buscar treino..."
-            >
-
-        </div>
-
-        <div
-            id="historyGrid"
-            class="history-grid"
-        >
-
-        </div>
-
-    </section>
-
     <div id="modalConfirmar" class="modal hidden">
 
     <div class="modal-content">
@@ -448,7 +424,8 @@
 
     </footer>
 
-</div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 
