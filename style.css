@@ -587,40 +587,44 @@ footer p{
 
 }
 
-@media(width: 425px) {
-    .header h1 {
-        font-size: 27px;
-}
 
-    .header p {
-        font-size: 15px;
-        padding-top: 14px;
-    }
-
-}
-
-@media(width: 375px) {
+@media(max-width: 600px) {
     .header h1 {
         font-size: 25px;
+        padding-left: 8px;
 }
 
     .header p {
-        font-size: 12px;
+        font-size: 14px;
         padding-top: 14px;
     }
 }
 
-@media(width: 320px) {
-    .header h1 {
-        font-size: 20px;
-    }
+@media(min-width: 601px) and (max-width: 999px) {
 
-    .header p {
-        font-size: 12px;
-        padding-top: 18px;
-    }
+    .header h1 {
+        font-size: 30px;
 }
 
+    .header p {
+        font-size: 20px;
+       
+    }
+
+
+}
+
+@media(min-width: 1000px) {
+
+    .header h1 {
+        font-size: 40px;
+}
+
+    .header p {
+        font-size: 25px;
+        
+    }
+}
 .treinos-grid{
     display:flex;
     flex-wrap:wrap;
