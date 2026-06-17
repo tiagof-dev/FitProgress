@@ -1,6 +1,6 @@
 {
-  "name": "Agenda Fitness",
-  "short_name": "Fitness",
+  "name": "FitProgress",
+  "short_name": "FitProgress",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#121212",

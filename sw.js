@@ -1,11 +1,14 @@
-const CACHE_NAME = "agenda-fitness-v2";
+const CACHE_NAME = "fitprogress-v1";
 
 const urlsToCache = [
   "./",
   "./index.html",
   "./historico.html",
   "./style.css",
-  "./script.js"
+  "./script.js",
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", event => {
